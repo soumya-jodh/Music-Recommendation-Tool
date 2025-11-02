@@ -7,7 +7,7 @@ app = Flask(__name__)
 # ---------------------------------------------------------
 # Load Dataset Once (for faster performance)
 # ---------------------------------------------------------
-data = pd.read_csv("SpotifyFeatures.csv", encoding="utf-8")
+data = pd.read_csv("music_dataset.csv", encoding="utf-8")
 
 # Select relevant columns
 features = [
@@ -64,3 +64,4 @@ def recommend():
 # ---------------------------------------------------------
 if __name__ == '__main__':
     app.run(debug=True)
+
