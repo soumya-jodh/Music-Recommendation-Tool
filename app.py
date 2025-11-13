@@ -4,9 +4,8 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 app = Flask(__name__)
 
-# ---------------------------------------------------------
-# Load Dataset Once (for faster performance)
-# ---------------------------------------------------------
+# Load Dataset Once 
+
 data = pd.read_csv("music_dataset.csv", encoding="utf-8")
 
 # Select relevant columns
@@ -28,9 +27,8 @@ data[num_features] = (
     data[num_features] - data[num_features].min()
 ) / (data[num_features].max() - data[num_features].min())
 
-# ---------------------------------------------------------
-# Helper Function: Recommend Songs
-# ---------------------------------------------------------
+# Helper Function: Recommend Songs 
+
 def recommend_songs(song_name, top_n=5):
     if song_name not in data['track_name'].values:
         similar = data[data['track_name'].str.contains(song_name.split()[0], case=False, na=False)]
@@ -42,9 +40,6 @@ def recommend_songs(song_name, top_n=5):
     recommendations = data.iloc[indices][['track_name', 'artist_name', 'genre']].reset_index(drop=True)
     return recommendations, None
 
-# ---------------------------------------------------------
-# Routes
-# ---------------------------------------------------------
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -59,9 +54,7 @@ def recommend():
     else:
         return render_template('index.html', not_found=True, suggestions=suggestions.values.tolist(), song=song_name)
 
-# ---------------------------------------------------------
 # Run App
-# ---------------------------------------------------------
+
 if __name__ == '__main__':
     app.run(debug=True)
-
