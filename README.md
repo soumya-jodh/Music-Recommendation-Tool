@@ -1,1 +1,3 @@
 # Music-Recommendation-Tool
+Recommends you music similar to your listening styles
+uses cosine similaritty to find similar songs based on features such as loudness, tempo, energy...
